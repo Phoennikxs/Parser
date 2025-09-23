@@ -58,9 +58,11 @@ for page in range(1, MAX_PAGES + 1):
     for item in items:
         try:
             title_element = WebDriverWait(item, 3).until(
-                EC.presence_of_element_located((By.CSS_SELECTOR, '[data-marker="item-title"] h3'))
+                EC.presence_of_element_located((By.CSS_SELECTOR, '[data-marker="item-title"]'))
             )
             title = title_element.text
+
+            print(title)
 
 
         except TimeoutException:
@@ -73,6 +75,7 @@ for page in range(1, MAX_PAGES + 1):
             raw_price = price_element.text
             price_digits = re.sub(r'\D', '', raw_price)
             price = int(price_digits) if price_digits else 0
+            print(price)
 
 
         except TimeoutException:
