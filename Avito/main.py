@@ -61,12 +61,13 @@ for page in range(1, MAX_PAGES + 1):
                 EC.presence_of_element_located((By.CSS_SELECTOR, '[data-marker="item-title"]'))
             )
             title = title_element.text
-
+            href = title_element.get_attribute("href")
             print(title)
-
+            print(href)
 
         except TimeoutException:
             title = None
+            href = None
 
         try:
             price_element = WebDriverWait(item, 3).until(
@@ -81,7 +82,7 @@ for page in range(1, MAX_PAGES + 1):
         except TimeoutException:
             price = 0
 
-        to_json = {'name':title, 'price':price, "id":3}
+        to_json = {'name':title, 'price':price, "id":3, "href":href}
 
         with open(f"object{i}.json", "w", encoding="utf-8") as f:
             json.dump(to_json, f, ensure_ascii=False, indent=2)

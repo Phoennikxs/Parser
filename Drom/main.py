@@ -41,8 +41,10 @@ while len(collected) < target_count:
                 EC.presence_of_element_located((By.CSS_SELECTOR, '[data-role="bulletin-link"]'))
             )
             title = title_element.text
+            href = title_element.get_attribute("href")
         except TimeoutException:
             title = None
+            href = None
 
         try:
             price_element = WebDriverWait(item, 3).until(
@@ -56,7 +58,7 @@ while len(collected) < target_count:
 
         collected.append({"title": title, "price": price})
 
-        to_json = {'name': title, 'price': price, "id": 1}
+        to_json = {'name': title, 'price': price, "id": 1, "href" : href}
 
         with open(f"object{i}.json", "w", encoding="utf-8") as f:
             json.dump(to_json, f, ensure_ascii=False, indent=2)
