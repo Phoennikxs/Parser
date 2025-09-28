@@ -1,0 +1,5 @@
+selenium==4.7.2
+psycopg2-binary==2.9.3
+# Если вы используете PostgreSQL
+mysql-connector-python==8.0.30 
+ # Если вы используете MySQL
